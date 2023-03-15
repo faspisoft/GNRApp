@@ -129,7 +129,7 @@ const login=async()=>{
                     // this.setState({ isLoading: false });
                     setIsLoading(false)
                     console.log(error);
-                    Alert.alert("Marwari Software", "1. There is some problem. Please try again"); 
+                    Alert.alert("Marwari Software", "1. There is some problem.  Please try again"); 
                 }
             }).catch(error => {
                 console.log(error);
