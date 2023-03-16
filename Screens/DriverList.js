@@ -108,7 +108,7 @@ const DriverList=({navigation})=>{
             <SafeAreaView style={{ flex: 1, backgroundColor: '#009A22' }}>
                 <View style={{ flex: 1, backgroundColor: "#eeeeee" }}>
                     <Header showBack={true} title={"Driver List"} rightIcon={logout}  />
-                    <TouchableOpacity style={{ marginTop: 20, width: 150, borderRadius: 10, borderWidth: 1, borderColor: "#009A22", backgroundColor: "#009A22", height: 40, marginBottom: 5, alignSelf: 'center', justifyContent: 'center' }} onPress={() => navigation.navigate('AddDriver')}>
+                    <TouchableOpacity style={{ marginTop: 20, width: 150, borderRadius: 10, borderWidth: 1, borderColor: "#009A22", backgroundColor: "#009A22", height: 40, marginBottom: 5, alignSelf: 'center', justifyContent: 'center' }} onPress={() => navigation.navigate("AddDriver")}>
                         <Text style={{ color: "#ffffff", alignSelf: "center" }}>Add Driver</Text>
                     </TouchableOpacity>
                     {/* <View style={{ flexDirection: "row", borderWidth: 0.5, borderColor: "#333333", alignItems: 'center', marginTop: 20 }}>
