@@ -92,7 +92,7 @@ const [LoginType,setLoginType]=React.useState("")
                     <View style={{ alignItems: 'center' }}>
                         <Text style={[styles.HeadText, { fontSize: 20, fontWeight: 'bold', color: "#11245a", margin: 15 }]}>Hello {SrName}</Text>
                     </View>
-                    {LoginType == 'LoadingPoint' && <>
+                    {LoginType == 'LoadingPoint' && <ScrollView>
                         <TouchableOpacity onPress={() => navigation.navigate('SearchVehicle')}>
                             {/* <View style={{ margin: 15, backgroundColor: this.state.displayBG, height: 80, alignItems: 'center', flexDirection: "row", elevation: 5 }}> */}
                             <View style={styles.btn}>
@@ -119,13 +119,25 @@ const [LoginType,setLoginType]=React.useState("")
                                 <Image style={{ width: 25, height: 25, marginTop: 25, marginRight: 10, tintColor: "#fff", resizeMode: 'contain', marginLeft: 10 }} source={rightIcon}></Image>
                             </View>
                         </TouchableOpacity>
+                        <TouchableOpacity onPress={() => navigation.navigate('DEFScreen')}>
+                            <View style={styles.btn}>
+                                <Text style={{ textTransform: "uppercase", fontSize: 20, color: "#fff", padding: 25, flex: 1 }}>DEF List</Text>
+                                <Image style={{ width: 25, height: 25, marginTop: 25, marginRight: 10, tintColor: "#fff", resizeMode: 'contain', marginLeft: 10 }} source={rightIcon}></Image>
+                            </View>
+                        </TouchableOpacity>
                         <TouchableOpacity onPress={() => navigation.navigate('PendingBookingList')}>
                             <View style={styles.btn}>
                                 <Text style={{ textTransform: "uppercase", fontSize: 20, color: "#fff", padding: 25, flex: 1 }}>Pending List</Text>
                                 <Image style={{ width: 25, height: 25, marginTop: 25, marginRight: 10, tintColor: "#fff", resizeMode: 'contain', marginLeft: 10 }} source={rightIcon}></Image>
                             </View>
                         </TouchableOpacity>
-                    </>}
+                        {/* <TouchableOpacity onPress={() => navigation.navigate('BarCode')}>
+                            <View style={styles.btn}>
+                                <Text style={{ textTransform: "uppercase", fontSize: 20, color: "#fff", padding: 25, flex: 1 }}>Scan QR</Text>
+                                <Image style={{ width: 25, height: 25, marginTop: 25, marginRight: 10, tintColor: "#fff", resizeMode: 'contain', marginLeft: 10 }} source={rightIcon}></Image>
+                            </View>
+                        </TouchableOpacity> */}
+                    </ScrollView>}
                     {LoginType == 'FuelStation' && <>
                         <TouchableOpacity onPress={() => navigation.navigate('PendingList')}>
                             <View style={styles.btn}>

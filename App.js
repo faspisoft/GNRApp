@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 // import * as Sharing from 'expo-sharing';
-import { NavigationContainer } from '@react-navigation/native';
+import { DefaultTheme, NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 // import SplashScreen from './Screens/Splash';
 import LoginScreen from './Screens/Login';
@@ -18,6 +18,10 @@ import  HistoryList from './Screens/HistoryList';
 import Cam from './Screens/cam';
 import DriverList from './Screens/DriverList';
 import AddDriver from './Screens/AddDriver';
+import DEFScreen from './Screens/DEFScreen';
+import AddDef from './Screens/AddDEF';
+import DefDetails from './Screens/DefDetails';
+import BarCode from './Screens/BarcodeScanner';
 
 const Stack = createNativeStackNavigator();
 
@@ -45,6 +49,11 @@ const App = () => {
         <Stack.Screen name="Camera" component={Cam} />
         <Stack.Screen name="DriverList" component={DriverList} />
         <Stack.Screen name="AddDriver" component={AddDriver} />
+        <Stack.Screen name="DEFScreen" component={DEFScreen} />
+        <Stack.Screen name="AddDEF" component={AddDef} />
+        <Stack.Screen name="DefDetails" component={DefDetails} />
+        <Stack.Screen name="BarCode" component={BarCode} />
+
       </Stack.Navigator>
     </NavigationContainer>
   )
