@@ -22,6 +22,7 @@ import DEFScreen from './Screens/DEFScreen';
 import AddDef from './Screens/AddDEF';
 import DefDetails from './Screens/DefDetails';
 import BarCode from './Screens/BarcodeScanner';
+import OtherExpence from './Screens/OtherExpence';
 
 const Stack = createNativeStackNavigator();
 
@@ -53,6 +54,7 @@ const App = () => {
         <Stack.Screen name="AddDEF" component={AddDef} />
         <Stack.Screen name="DefDetails" component={DefDetails} />
         <Stack.Screen name="BarCode" component={BarCode} />
+        <Stack.Screen name="OtherExpence" component={OtherExpence} />
 
       </Stack.Navigator>
     </NavigationContainer>

@@ -26,9 +26,10 @@ const AddDef=({navigation})=>{
     const [openVehicleList,setopenVehicleList]=React.useState(false);
     const [SelectedVehicleNo,setSelectedVehicleNo]=React.useState();
     const [selectedVehicleId,setselectedVehicleId]=React.useState();
+    const [LrNo,setLRNo]=React.useState();
 
 
-    console.log("Date")
+    // console.log("Date")
     
   const  onDateChange = (date) => {
         setDate(moment(date).format('YYYYMMDD'))
@@ -162,7 +163,7 @@ const AddDef=({navigation})=>{
         }, [])
 
    const SaveDEF = async() => {
-        setisDisabled(true)
+       
         setisLoading(true)
         const token = await AsyncStorage.getItem('AUTH');
           let body = {
@@ -172,6 +173,7 @@ const AddDef=({navigation})=>{
             EnteredById: 1,
             EntryDate: 20230202,
             EntryTime: 170948,
+            LrNo:LrNo,
             Quantity: quantity,
             DateV: "0001-01-01T00:00:00",
             PumpName: null,
@@ -195,8 +197,13 @@ const AddDef=({navigation})=>{
                     var respObject = JSON.parse(responseText);
                     console.log(respObject.Message,"Message")
                     if (respObject.Message == "Saved Successfully.") {
-                        alert(respObject.Message);
-                        navigation.goBack(null);
+                        Alert.alert(
+                            'Marwari Software',
+                            respObject.Message,
+                            [
+                              { text:  "Ok", onPress: () => navigation.goBack(null)},
+                            ]);               
+                        setisDisabled(true)
                     }
                   else{
                     alert(respObject.Message);
@@ -241,6 +248,10 @@ const AddDef=({navigation})=>{
                         <View style={{ marginTop: 10 }}>
                             <Text style={{ color: "#000", textAlign: 'left', marginLeft: 15 }}>Quantity</Text>
                             <TextInput style={[styles.TextInputStyle]} keyboardType="numeric"   onChangeText={(num) => setQuantity(num)}/>
+                        </View>
+                        <View style={{ marginTop: 10 }}>
+                            <Text style={{ color: "#000", textAlign: 'left', marginLeft: 15 }}>LR No</Text>
+                            <TextInput style={[styles.TextInputStyle]} keyboardType="numeric"   onChangeText={(num) => setLRNo(num)}/>
                         </View>
                         <View style={{ flexDirection: 'row', marginTop: 20, marginStart: 10 }}>
                             <TouchableOpacity style={{ width: '90%', borderRadius: 10, borderWidth: 1, borderColor: "#009A22", backgroundColor: "#009A22", height: 40, marginStart: 15, alignSelf: 'center', justifyContent: 'center' }} disabled={isDisabled} onPress={() => SaveDEF()}>

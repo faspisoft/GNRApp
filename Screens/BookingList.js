@@ -157,10 +157,15 @@ const [BookingList,setBookingList]=React.useState([]);
             <SafeAreaView style={{ flex: 1, backgroundColor: '#009A22' }}>
                 <View style={{ flex: 1, backgroundColor: "#eeeeee" }}>
                     <Header showBack={true} title={"Booking List"} rightIcon={logout}  />
-
-                    <TouchableOpacity style={{ marginTop: 20, width: 150, borderRadius: 10, borderWidth: 1, borderColor: "#009A22", backgroundColor: "#009A22", height: 40, marginBottom: 5, alignSelf: 'center', justifyContent: 'center' }} onPress={() => navigation.navigate('Booking',{Vno:route.params.VehicleNo, Vid:route.params.VehicleId})}>
+              <View style={{flexDirection:"row"}}>
+                     <TouchableOpacity style={{marginLeft:35, margin: 20, width: 100, borderRadius: 10, borderWidth: 1, borderColor: "#009A22", backgroundColor: "#009A22", height: 40, marginBottom: 5, alignSelf: 'center', justifyContent: 'center' }} onPress={() => navigation.navigate('Booking',{Vno:route.params.VehicleNo, Vid:route.params.VehicleId})}>
                         <Text style={{ color: "#ffffff", alignSelf: "center" }}>Add Booking</Text>
                     </TouchableOpacity>
+                    <TouchableOpacity style={{ margin: 20, width: 100, borderRadius: 10, borderWidth: 1, borderColor: "#009A22", backgroundColor: "#009A22", height: 40, marginBottom: 5, alignSelf: 'center', justifyContent: 'center' }} onPress={() => navigation.navigate('OtherExpence',{Vno:route.params.VehicleNo, Vid:route.params.VehicleId})}>
+                        <Text style={{ color: "#ffffff", alignSelf: "center" }}>Other Expence</Text>
+                    </TouchableOpacity>
+               </View>
+                   
                     <View style={{ flexDirection: "row", borderWidth: 0.5, borderColor: "#333333", alignItems: 'center', marginTop: 20 }}>
                         <TextInput style={{ color: "#000", height: 40, padding: 10, flex: 1 }} placeholder="Search..." placeholderTextColor="#333333" onChangeText={(text) =>filterLeder(text)}></TextInput>
                         <Image style={{ width: 25, height: 25, marginRight: 0, tintColor: "#000000", marginRight: 10 }} source={searchIcon}></Image>

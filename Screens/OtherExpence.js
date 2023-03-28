@@ -22,22 +22,7 @@ import {manipulateAsync,FlipType,SaveFormat} from "expo-image-manipulator";
 // import RNFetchBlob from "rn-fetch-blob";
 // import { AppRegistry, Platform } from 'react-native';
 const fontFactor = PixelRatio.getFontScale();
-// let options = {
-//     title: 'Select Image',
-//     customButtons: [
-//         { name: 'customOptionKey', title: 'Choose Photo from Custom Option' },
-//     ],
-//     maxWidth: 800,
-//     maxHeight: 600,
-//     storageOptions: {
-//         skipBackup: true,
-//         path: 'images',
-//     },
-// };
-// const fs = RNFetchBlob.fs;
-// RNFetchBlob.config({
-//     fileCache: true
-// })
+
 
 const Booking=({navigation,route})=>{
 
@@ -64,28 +49,29 @@ const [SelectedPumpNo2,setSelectedPumpNo2]=React.useState('');
 const [openPumpList2,setopenPumpList2]=React.useState(false);
 const [PumpList2,setPumpList2]=React.useState([]);
 ////////////////////////////////////////////////////
-const [SelectedItemNo,setSelectedItemNo]=React.useState('');
+const [selectedItemId,setselectedItemId]=React.useState(6)
+const [SelectedItemNo,setSelectedItemNo]=React.useState("Empty");
 const [openItemList,setopenItemList]=React.useState(false)
 const [ItemList,setItemList]=React.useState([])
-const [selectedItemId,setselectedItemId]=React.useState('')
 //////////////////////////////////////////////////////
-const [SelectedFromNo,setSelectedFromNo]=React.useState('')
+const [selectedFromId,setselectedFromId]=React.useState(365)
+const [SelectedFromNo,setSelectedFromNo]=React.useState('other expenses ')
 const [openFromList,setopenFromList]=React.useState(false)
 const [FromList,setFromList]=React.useState([])
-const [selectedFromId,setselectedFromId]=React.useState('')
 ////////////////////////////////////////////
-const [SelectedToNo,setSelectedToNo]=React.useState('')
+const [selectedToId,setselectedToId]=React.useState(365)
+const [SelectedToNo,setSelectedToNo]=React.useState('other expenses ')
 const [openToList,setopenToList]=React.useState(false)
 const [ToList,setToList]=React.useState([])
-const [selectedToId,setselectedToId]=React.useState('')
-
-
-const [GRNo,setGrNo]=React.useState('')
-const [LDWT,setLDWT]=React.useState('')
+const [GRNo,setGrNo]=React.useState("0")
+const [LDWT,setLDWT]=React.useState("0")
 const [Fuel1,setFuel1]=React.useState('')
 const [Advance1,setAdvance1]=React.useState('')
 const [Fuel2,setFuel2]=React.useState('')
 const [Advance2,setAdvance2]=React.useState('')
+
+const [DEF1,setDEF1]=React.useState('')
+const [DEF2,setDEF2]=React.useState('')
 const [Remark,setRemark]=React.useState('')
 const [isLoading,setisLoading]=React.useState(false)
 const [Mode,setMode]=React.useState(Mode)
@@ -94,6 +80,8 @@ const [selectedLedger,setselectedLedger]=React.useState('')
 const [openModel,setopenModel]=React.useState(false)
 const [ewaybill,setewaybill]=React.useState('')
 const [emawayValid,setemawayValid]=React.useState(moment(new Date()).format('YYYYMMDD'))
+
+
 const [DriverId,setDriverId]=React.useState('')
 const [isFocus,setisFocus]=React.useState(false)
 const [DriverList,setDriverList]=React.useState([])
@@ -104,7 +92,7 @@ const [fileData2,setfileData2]=React.useState(null)
 const [fileUri,setfileUri]=React.useState('')
 const [fileUri2,setfileUri2]=React.useState('')
 const [FirmList,setFirmList]=React.useState([])
-const [FirmId,setFirmId]=React.useState('')
+const [FirmId,setFirmId]=React.useState(5)
 const [imageUri,setImageUri]=React.useState(null);
 const [imageUri2,setImageUri2]=React.useState(null);
 const [cameraPermission1, setCameraPermission1] = React.useState(null);
@@ -266,7 +254,7 @@ const [type, setType] = React.useState(Camera.Constants.Type.back);
                 // this.setState({ isLoading: false });
                 setisLoading(false)
                 console.log("1", error);
-                alert("There is some problem. Please try again");
+                alert("There is some problem. Please try again ");
             }
         })
             .catch(error => {
@@ -461,7 +449,7 @@ const [type, setType] = React.useState(Camera.Constants.Type.back);
                 if (respObject.Message) {
                     // this.setState({ isLoading: false });
                     setisLoading(false)
-                    alert(respObject.Message);
+                    // alert(respObject.Message);
                     navigation.goBack(null);
                 } else {
                     fullData = respObject;
@@ -590,45 +578,45 @@ const [type, setType] = React.useState(Camera.Constants.Type.back);
     }
 
 
-    const getDiesalAdvance =  async ()=> {
-        const token = await AsyncStorage.getItem('AUTH');
-    if(LDWT.trim()!=='' &&  selectedFromId!=='' &&  selectedToId!=='' &&  selectedItemId!==''){        
-        fetch(baseUrl+ "" + "/api/ApiDieselAdvance", {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-                "Auth": token,
-                "VehicleId":selectedVehicleId,
-                "LoadingWeight": parseFloat(LDWT.trim()).toFixed(2),
-                "FromStationId": selectedFromId,
-                "ToStationId": selectedToId,
-                "ItemId": selectedItemId,
-                "platform": "Android",
-            },
-            redirect: 'follow'
+//     const getDiesalAdvance =  async ()=> {
+//         const token = await AsyncStorage.getItem('AUTH');
+//     if(LDWT.trim()!=='' &&  selectedFromId!=='' &&  selectedToId!=='' &&  selectedItemId!==''){        
+//         fetch(baseUrl+ "" + "/api/ApiDieselAdvance", {
+//             method: "GET",
+//             headers: {
+//                 "Content-Type": "application/json",
+//                 "Auth": token,
+//                 "VehicleId":selectedVehicleId,
+//                 "LoadingWeight": parseFloat(LDWT.trim()).toFixed(2),
+//                 "FromStationId": selectedFromId,
+//                 "ToStationId": selectedToId,
+//                 "ItemId": selectedItemId,
+//                 "platform": "Android",
+//             },
+//             redirect: 'follow'
     
-        })
-            .then(response => response.text())
-            .then(responseText => {
-                // setState({ isLoading: false });
-                setisLoading(false)
-                try {
-                    console.log(responseText);
-                    var respObject = JSON.parse(responseText);
-                    setFuel1(parseFloat(respObject.AllowedDiesel))
-                    setAdvance1(parseFloat(respObject.AllowedAdvance))
-                    // this.setState({Fuel1: parseFloat(respObject.AllowedDiesel)});
-                    // this.setState({Advance1:parseFloat(respObject.AllowedAdvance)});
+//         })
+//             .then(response => response.text())
+//             .then(responseText => {
+//                 // setState({ isLoading: false });
+//                 setisLoading(false)
+//                 try {
+//                     console.log(responseText);
+//                     var respObject = JSON.parse(responseText);
+//                     setFuel1(parseFloat(respObject.AllowedDiesel))
+//                     setAdvance1(parseFloat(respObject.AllowedAdvance))
+//                     // this.setState({Fuel1: parseFloat(respObject.AllowedDiesel)});
+//                     // this.setState({Advance1:parseFloat(respObject.AllowedAdvance)});
     
-                } catch (error) {
-                    alert("Error in Fetching Diesal Advance 1");
-                }
-            })
-            .catch(error => {
-                alert("Error in Fetching Diesal Advance 2");
-            });
-    }
-}
+//                 } catch (error) {
+//                     alert("Error in Fetching Diesal Advance 1");
+//                 }
+//             })
+//             .catch(error => {
+//                 alert("Error in Fetching Diesal Advance 2");
+//             });
+//     }
+// }
 
     // componentDidMount() {
     //     console.log("Version===", VersionInfo.appVersion);
@@ -655,145 +643,7 @@ const [type, setType] = React.useState(Camera.Constants.Type.back);
         loadData()
         }, [])
 
-       
-    const convertToBase64 =async () => {
-        const toDataURL = url => fetch(url)
-        .then(response => response.blob())
-        .then(blob => new Promise((resolve, reject) => {
-          const reader = new FileReader()
-          reader.onloadend = () => resolve(reader.result)
-          reader.onerror = reject
-          reader.readAsDataURL(blob)
-        }))
-        toDataURL(imageUri)
-        .then(async dataUrl => {
-        const source = { uri:  dataUrl };
-        const imgstr=source.uri;
-        const strImage = imgstr.replace("data:image/jpeg;base64,", "");
-        // console.log("imageString",strImage)
-        setfileData(strImage)
-        }) 
-    };
- 
-    const  convertTo2Base64 = async() => {
-        const toDataURL = url => fetch(url)
-        .then(response => response.blob())
-        .then(blob => new Promise((resolve, reject) => {
-          const reader = new FileReader()
-          reader.onloadend = () => resolve(reader.result)
-          reader.onerror = reject
-          reader.readAsDataURL(blob)
-        }))
-        toDataURL(imageUri2)
-        .then(async dataUrl => {
-            const source = { uri:  dataUrl };
-            const imgstr=source.uri;
-            const strImage = imgstr.replace("data:image/jpeg;base64,", "");
-            // console.log("imageString",strImage)
-            setfileData2(strImage)
-        })
-    };
-   
-    // console.log("filedata",fileData)
-    // console.log("filedata2",fileData2)
-      const  ChooseBilty = async() => {
-        const cameraPermission = await Camera.requestCameraPermissionsAsync();
-        // console.log(cameraPermission,"cemraperminssion")
-            //  console.log(cameraPermission.status ==="granted","istrueornot")
-            setCameraPermission1(cameraPermission.status ==="granted");
-            if (
-            //   imagePermission.status !== 'granted' &&
-              cameraPermission.status !== 'granted'
-            ) {
-              alert('Permission for media access needed.');
-            }
-    }
-
-    // console.log(cameraPermission1,"checkpermission")
-    const takePicture1 = async () => {
-        if (camera) {
-          const data = await camera.takePictureAsync(null);
-          const manipResult= await manipulateAsync(data.uri,[],{compress:0.2});
-          console.log("maipulate",manipResult)
-          setImageUri(manipResult.uri);
-          setCameraPermission1(null)
-        }
-      };
-
-      const submitImage1=async()=>{
-            convertToBase64()
-            setImageUri(null)
-      }
-  
-        const ChooseInvoice = async () => {
-            // here is how you can get the camera permission
-            const cameraPermission = await Camera.requestCameraPermissionsAsync();
-            // console.log(cameraPermission,"cemraperminssion")
-            // console.log(cameraPermission.status ==="granted")
-            setCameraPermission2(cameraPermission.status ==="granted");
-            if (
-            //   imagePermission.status !== 'granted' &&
-              cameraPermission.status !== 'granted'
-            ) {
-              alert('Permission for media access needed.');
-            }
-            // console.log(cameraPermission1.status,"camera Permision")
-          };
-        //  console.log(cameraPermission2,"checkpermission2")
-          const takePicture2 = async () => {
-            if (camera) {
-            const data = await camera.takePictureAsync(null);
-           const manipResult= await manipulateAsync(data.uri,[],{compress:0.2});
-          setImageUri2(manipResult.uri);
-          setCameraPermission2(null)
-            }
-          };
-        
-          const submitImage2=async()=>{
-            convertTo2Base64()
-            setImageUri2(null)
-          }
-
-        //   const pickImage = async () => {
-        //     let result = await ImagePicker.launchImageLibraryAsync({
-        //       mediaTypes: ImagePicker.MediaTypeOptions.Images,
-        //       allowsEditing: true,
-        //       aspect: [1],
-        //       quality: 1,
-        //     });
-        //     // console.log(result);
-        //     if (!result.canceled) {
-        //       setImageUri2(result.uri);
-        //     }
-        //   };
-        //   permisionFunction()
-        // launchCamera(options, (response) => { // Use launchImageLibrary to open image gallery
-        //     console.log('Response = ', response);
-
-        //     if (response.didCancel) {
-        //         console.log('User cancelled image picker');
-        //     } else if (response.error) {
-        //         console.log('ImagePicker Error: ', response.error);
-        //     } else if (response.customButton) {
-        //         console.log('User tapped custom button: ', response.customButton);
-        //     } else {
-        //         const source = { uri: response.assets[0].uri };
-        //         // this.setState({
-        //         //     filePath2: response.assets[0].fileName,
-        //         //     fileData2: response.data,
-        //         //     fileUri2: response.assets[0].uri
-        //         // });
-        //           setfilePath2(response.assets[0].fileName)
-        //           setfileData2(response.data)
-        //           setfileUri2(response.assets[0].uri)
-        //         let bscode = fs.readFile(fileUri2);
-        //         fs.readFile(fileUri2, 'base64')
-        //             .then(res => convertTo2Base64(res));
-        //     }
-        // });
-    // }
-    // console.log("convertedintobase64",fileData)
-
+     
     
     const  SaveBooking =async () => {
         // console.log(fileData);
@@ -823,14 +673,14 @@ const [type, setType] = React.useState(Camera.Constants.Type.back);
                 ToStationId: selectedToId,
                 ItemId: selectedItemId,
                 Remark: Remark,
+                Def: DEF1,
+                Def2: DEF2,
                 EntryDate1: Date1,
                 EntryDate2: Date2,
                 DriverId: DriverId,
                 TransportId:FirmId,
                 ewaybill: ewaybill,
                 ewayValid: (ewaybill === '' ? 0 : moment(emawayValid).format('YYYYMMDD')),
-                BiltyBase64: fileData,
-                InvoiceBase64: fileData2,
                 AppVersion: version,
             }
             console.log("Body",body)
@@ -885,106 +735,18 @@ const [type, setType] = React.useState(Camera.Constants.Type.back);
     }
     
     
-    // console.log("selectedPump",SelectedPumpNo1)
-    // ("selectedPumpId",selectedPumpId1)
-    // console.log("2",selectedPumpId2)
-    // contains = ({ Ledger }, query) => {
-    //     console.log({ Ledger })
-    //     if (Ledger && Ledger.toLowerCase().includes(query)) {
-    //         return true
-    //     }
-    //     return false
-    // }
-    // filterLeder = (text) => {
-    //     const formattedQuery = text.toLowerCase()
-    //     const data = filter(this.fullData, Ledger => {
-    //         return this.contains(Ledger, formattedQuery);
-    //     })
-    //     this.setState({ LedgerList: data });
-
-    // }
-
-    // FlatListHeader = () => {
-    //     return (
-    //         <View
-    //             style={{
-    //                 height: 40,
-    //                 width: "100%",
-    //                 backgroundColor: "#dddddd",
-    //                 flexDirection: 'row'
-    //             }}>
-    //             <Text style={{ fontSize: 12 / fontFactor, marginLeft: 10, alignSelf: "center", flex: 1, color: "#000000" }}>Date</Text>
-    //             <Text style={{ fontSize: 12 / fontFactor, marginEnd: 10, alignSelf: "center", flex: 2, textAlign: 'center', color: "#000000" }}>Customer</Text>
-    //             <Text style={{ fontSize: 12 / fontFactor, marginEnd: 10, alignSelf: "center", flex: 3, textAlign: 'center', color: "#000000" }}>Alloted</Text>
-    //         </View>
-    //     );
-    // }
-
-    // format = amount => {
-    //     return Number(amount)
-    //         .toFixed(2)
-    //         .replace(/\d(?=(\d{3})+\.)/g, '$&,');
-    // };
-
-    // render() {
 
         return (
             <SafeAreaView style={{ flex: 1, backgroundColor: '#eeeeee' }}>
-                   {cameraPermission1 && 
-                   <View style={styles.camcontainer}>
-          <View style={styles.cameraContainer}>
-            <Camera
-              ref={(ref) => setCamera(ref)}
-              style={styles.fixedRatio}
-              type={type}
-              ratio={'1'}
-            />
-             </View>
-         <View>
-          <TouchableOpacity onPress={takePicture1} style={styles.capturebtn}>
-            <Text style={{textAlign:"center"}}>Take Picture</Text>
-          </TouchableOpacity>
-         </View>  
-     
-        </View> }
-        {imageUri && <View style={styles.camcontainer}>
-            <Image source={{ uri: imageUri }} style={{ flex: 1 }} />
-            <TouchableOpacity onPress={submitImage1} style={styles.capturebtn} >
-            <Text style={{textAlign:"center"}}>Submit</Text>
-          </TouchableOpacity>
-                </View>} 
-                
-        {cameraPermission2 &&
-        <View>
-            <View style={styles.camcontainer}>
-          <View style={styles.cameraContainer}>
-            <Camera
-              ref={(ref) => setCamera(ref)}
-              style={styles.fixedRatio}
-              type={type}
-              ratio={'1'}
-            />
-          
-          </View>
-          <TouchableOpacity onPress={takePicture2} style={styles.capturebtn}>
-            <Text style={{textAlign:"center"}}>Take Picture</Text>
-          </TouchableOpacity>
-        </View>
-        </View>}
-        {imageUri2 && <View style={styles.camcontainer} >
-            <Image source={{ uri: imageUri2 }} style={{ flex: 1 }} />
-            <TouchableOpacity onPress={submitImage2} style={styles.capturebtn}>
-                <Text style={{textAlign:"center"}}>Submit</Text>
-          </TouchableOpacity>
-           </View> }
-       
+                   
                 <ScrollView>
                     <View style={{ flex: 1, backgroundColor: "#eeeeee" }}>
                         <Header showBack={true} title={"GNR"} rightIcon={logout} openModeModel={openModeModel} />
-                        <Text style={{ color: "#b22222", alignSelf: "center", marginTop: 10, fontSize: 20, textDecorationLine: 'underline' }}>Add Booking</Text>
+                        <Text style={{ color: "#b22222", alignSelf: "center", marginTop: 10, fontSize: 20, textDecorationLine: 'underline' }}>Other Expence</Text>
                         <View style={{ marginTop: 10, marginLeft: 15, marginRight: 15 }}>
                             <Text style={{ color: "#000", textAlign: 'left', marginLeft: 5 }}>Firm Name</Text>
                             <Dropdown
+                              disable={true}
                                 style={[styles.dropdown, isFocus && { borderColor: 'blue' }]}
                                 placeholderStyle={styles.placeholderStyle}
                                 selectedTextStyle={styles.selectedTextStyle}
@@ -997,9 +759,10 @@ const [type, setType] = React.useState(Camera.Constants.Type.back);
                                 valueField="value"
                                 placeholder={!isFocus ? 'Select item' : '...'}
                                 searchPlaceholder="Search..."
-                                // value={id}
+                                value={FirmId}
                                 onFocus={() => setisFocus(true)}
                                 onBlur={() => setisFocus(false)}
+                            
                                 onChange={item => {
                                     // this.setState({ FirmId: item.value });
                                     // this.setState({ isFocus: false })
@@ -1033,6 +796,7 @@ const [type, setType] = React.useState(Camera.Constants.Type.back);
                         <View style={{ marginTop: 10, marginLeft: 15, marginRight: 15 }}>
                             <Text style={{ color: "#000", textAlign: 'left', marginLeft: 5 }}>Driver Name</Text>
                             <Dropdown
+                               disable={true}
                                 style={[styles.dropdown, isFocus && { borderColor: 'blue' }]}
                                 placeholderStyle={styles.placeholderStyle}
                                 selectedTextStyle={styles.selectedTextStyle}
@@ -1064,48 +828,38 @@ const [type, setType] = React.useState(Camera.Constants.Type.back);
                             // )}
                             />
                         </View>
-                        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                            <View style={{ flex: 1, marginTop: 10 }}>
-                                <Text style={styles.lableStyle}>E-Way Bill No.</Text>
-                                <TextInput keyboardType='numeric' style={[styles.TextInputStyle]} value={ewaybill} onChangeText={(eway) => setewaybill(eway.replace(/[^0-9]/g, ''))} />
-                            </View>
-                            <View style={{ flex: 1, marginTop: 10 }}>
-                                <Text style={styles.lableStyle}>E-Way Bill Valid UpTo</Text>
-                                <TouchableOpacity onPress={() => setIsOpencalender(true)}>
-                                    <Text editable={false} style={[styles.TextInputStyle]} >{moment(emawayValid).format('DD MMM YYYY')}</Text>
-                                </TouchableOpacity>
-                            </View>
-                        </View>
+                   
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                             <View style={{ flex: 1, marginTop: 10 }}>
                                 <Text style={styles.lableStyle}>G.R Number</Text>
                                 {/* <TextInput keyboardType='numeric' style={[styles.TextInputStyle]} onChangeText={(grnos) => { this.setState({ GRNo: grnos }); }} /> */}
-                                <TextInput keyboardType='numeric' style={[styles.TextInputStyle]} value={GRNo} onChangeText={(grnos) => setGrNo(grnos.replace(/[^0-9]/g, ''))} />
+                                <TextInput keyboardType='numeric' style={[styles.TextInputStyle]} editable={false} selectTextOnFocus={false}>{GRNo}</TextInput>
                             </View>
                             <View style={{ flex: 1, marginTop: 10 }}>
                                 <Text style={styles.lableStyle}>Loading Weight</Text>
-                                <TextInput style={[styles.TextInputStyle]} keyboardType="numeric" onChangeText={(ldw) => { setLDWT(ldw); getDiesalAdvance(); }} />
+                                <TextInput style={[styles.TextInputStyle]} keyboardType="numeric" editable={false} selectTextOnFocus={false}>{LDWT}</TextInput>
                             </View>
                         </View>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                             <View style={{ flex: 1, marginTop: 10 }}>
                                 <Text style={{ color: "#000", textAlign: 'left', marginLeft: 15 }}>From Station</Text>
-                                <TouchableOpacity onPress={() => setopenFromList(true)}>
+                                {/* <TouchableOpacity onPress={() => setopenFromList(true)} > */}
                                     <TextInput style={[styles.TextInputStyle]} editable={false}>{SelectedFromNo}</TextInput>
-                                </TouchableOpacity>
+                                {/* </TouchableOpacity> */}
                             </View>
                             <View style={{ flex: 1, marginTop: 10 }}>
                                 <Text style={{ color: "#000", textAlign: 'left', marginLeft: 15 }}>To Station</Text>
-                                <TouchableOpacity onPress={() => setopenToList(true)}>
+                                {/* <TouchableOpacity onPress={() => setopenToList(true)}> */}
                                     <TextInput style={[styles.TextInputStyle]} editable={false}>{SelectedToNo}</TextInput>
-                                </TouchableOpacity>
+                                {/* </TouchableOpacity> */}
                             </View>
                         </View>
                         <View style={{ marginTop: 10 }}>
                             <Text style={{ color: "#000", textAlign: 'left', marginLeft: 15 }}>Item</Text>
-                            <TouchableOpacity onPress={() => setopenItemList(true)}>
-                                <TextInput style={[styles.TextInputStyle]} editable={false}>{SelectedItemNo}</TextInput>
-                            </TouchableOpacity>
+                            {/* <TouchableOpacity onPress={() => setopenItemList(true)}> */}
+                            <Text style={[styles.TextInputStyle]}>{SelectedItemNo}</Text>
+                             
+                            {/* </TouchableOpacity> */}
                         </View>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                             <View style={{ flex: 1, marginTop: 10 }}>
@@ -1143,7 +897,7 @@ const [type, setType] = React.useState(Camera.Constants.Type.back);
                                 <TextInput style={[styles.TextInputStyle]} keyboardType="numeric" onChangeText={(adv) => { setAdvance2(adv) }} />
                             </View>
                         </View>
-                        {/* <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                             <View style={{ flex: 1, marginTop: 10 }}>
                                 <Text style={styles.lableStyle}>DEF-1</Text>
                                 <TextInput style={[styles.TextInputStyle]} keyboardType="numeric" onChangeText={(def) => setDEF1(def) } />
@@ -1152,7 +906,7 @@ const [type, setType] = React.useState(Camera.Constants.Type.back);
                                 <Text style={styles.lableStyle}>DEF-2</Text>
                                 <TextInput style={[styles.TextInputStyle]} keyboardType="numeric" onChangeText={(def) =>setDEF2(def)} />
                             </View>
-                        </View> */}
+                        </View>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                             <View style={{ flex: 1, marginTop: 10 }}>
                                 <Text style={styles.lableStyle}>Date-1</Text>
@@ -1171,20 +925,7 @@ const [type, setType] = React.useState(Camera.Constants.Type.back);
                             <Text style={{ color: "#000", textAlign: 'left', marginLeft: 15 }}>Remark (If Any)</Text>
                             <TextInput style={[styles.TextInputStyle]} onChangeText={(rem) => setRemark(rem)} />
                         </View>
-                        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                            <View style={[styles.btnParentSection, { flex: 1 }]}>
-                                <TouchableOpacity style={styles.btnText} onPress={ChooseBilty} >
-                                    <Text style={{ color: "#ffffff", alignSelf: "center" }}>Photo Bility</Text>
-                                </TouchableOpacity>
-                            </View>
-                         
-                            <View style={[styles.btnParentSection, { flex: 1 }]}>
-                                <TouchableOpacity style={styles.btnText} onPress={ChooseInvoice} >
-                                    <Text style={{ color: "#ffffff", alignSelf: "center" }}>Photo Invoice</Text>
-                                </TouchableOpacity>
-                            </View>
-                        
-                        </View>
+                       
                         <View style={{ flexDirection: 'row', marginTop: 20, marginStart: 10, marginBottom: 10 }}>
                             <TouchableOpacity style={{ width: '90%', borderRadius: 10, borderWidth: 1, borderColor: "#009A22", backgroundColor: "#009A22", height: 40, marginStart: 15, alignSelf: 'center', justifyContent: 'center' }} disabled={isDisabled} onPress={() =>SaveBooking()}>
                                 <Text style={{ color: "#ffffff", alignSelf: "center" }}>     Save     </Text>

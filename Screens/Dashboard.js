@@ -4,6 +4,7 @@ import Header from './Header';
 // import ChooseModel from './ChooseModel';
 import logout from '../assets/logout.png';
 import rightIcon from '../assets/right_icon.png';
+import scanicon from "../assets/scanicon.png"
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {baseUrl} from "../package.json";
 const fontFactor = PixelRatio.getFontScale();
@@ -121,7 +122,7 @@ const [LoginType,setLoginType]=React.useState("")
                         </TouchableOpacity>
                         <TouchableOpacity onPress={() => navigation.navigate('DEFScreen')}>
                             <View style={styles.btn}>
-                                <Text style={{ textTransform: "uppercase", fontSize: 20, color: "#fff", padding: 25, flex: 1 }}>DEF List</Text>
+                                <Text style={{ textTransform: "uppercase", fontSize: 20, color: "#fff", padding: 25, flex: 1 }}>DEf</Text>
                                 <Image style={{ width: 25, height: 25, marginTop: 25, marginRight: 10, tintColor: "#fff", resizeMode: 'contain', marginLeft: 10 }} source={rightIcon}></Image>
                             </View>
                         </TouchableOpacity>
@@ -134,7 +135,7 @@ const [LoginType,setLoginType]=React.useState("")
                         {/* <TouchableOpacity onPress={() => navigation.navigate('BarCode')}>
                             <View style={styles.btn}>
                                 <Text style={{ textTransform: "uppercase", fontSize: 20, color: "#fff", padding: 25, flex: 1 }}>Scan QR</Text>
-                                <Image style={{ width: 25, height: 25, marginTop: 25, marginRight: 10, tintColor: "#fff", resizeMode: 'contain', marginLeft: 10 }} source={rightIcon}></Image>
+                                <Image style={{ width: 35, height: 35, marginTop: 25, marginRight: 10, tintColor: "#fff", resizeMode: 'contain', marginLeft: 10 }} source={scanicon}></Image>
                             </View>
                         </TouchableOpacity> */}
                     </ScrollView>}
@@ -245,7 +246,7 @@ const styles = StyleSheet.create({
         elevation: 15,
         flexDirection: "row",
         margin: 15,
-        backgroundColor: "#009A22",//"#3f51b5",
+        backgroundColor: "#009A22",
         color: "#000",
         borderRadius: 10,
         boxShadow: "0px 2px 2px lightgray",
